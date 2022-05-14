@@ -1,4 +1,10 @@
 node_modules/
 
+server.js
+
+log.txt
+
 .eslintrc
 .stylelintrc.json
+
+doc.txt
