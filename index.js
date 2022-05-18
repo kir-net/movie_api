@@ -236,11 +236,6 @@ app.delete('/users/:deleteID/', (req, res) => {
 
 // --------------- other ---------------------------
 
-// Using the Express routing syntax, create an Express GET route located at the endpoint “/movies” that returns a JSON object containing data about your top 10 movies
-app.get('/movies', (req, res) => {
-    res.json(topMovies);
-})
-
 //Create another GET route located at the endpoint “/” that returns a default textual response of your choosing
 app.get('/', (req, res) => {
   res.send('Welcome to my app!');
