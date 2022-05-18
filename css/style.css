@@ -1,0 +1,13 @@
+.column {
+    padding: 1vw 2vw 1vw 0;
+    text-align: left;
+    vertical-align: top;
+}
+
+h1, h2, p, table{   
+    margin: 1vw;
+}
+
+h2{
+    margin-top: 3vw;
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>myFlix API Documentation</title>
 </head>
 
@@ -13,6 +14,121 @@
         The objective of this work-in-progress project is to build a server-side component of a “movies” web application called myFlix.<br>
         The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
     </p>
+
+    <h2>URL endpoints and request methods</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="column">Request</th>
+                <th class="column">Endpoint URL</th>
+                <th class="column">HTTP Method</th>
+                <th class="column">Query parameters</th>
+                <th class="column">Request body data format</th>
+                <th class="column">Response body data format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="column">Return list of all movies</td>
+                <td class="column">/movies</td>
+                <td class="column">GET</td> 
+                <td class="column">None</td>              
+                <td class="column">None</td>
+                <td class="column">JSON object holding data about all movies, e.g.
+                    [{"Title": "Down by Law",
+                    "Year": 1986,
+                    "Genre": "Independent",
+                    "Director": "Jim Jarmusch"}, {...}, ...]</td>
+            </tr>
+            <tr>
+                <td class="column">Return info about one movie by title</td>
+                <td class="column">/movies/[title]</td>
+                <td class="column">GET</td>
+                <td class="column">:title</td>
+                <td class="column">None</td>
+                <td class="column">JSON object holding data about requested movie, e.g. {"Title": "Down by Law",
+                    "Year": 1986,
+                    "Genre": "Independent",
+                    "Director": "Jim Jarmusch"}</td>
+            </tr>
+            <tr>
+                <td class="column">Return info about a genre by name</td>
+                <td class="column">/genres/[Genre]</td>
+                <td class="column">GET</td>
+                <td class="column">:genre</td>
+                <td class="column">None</td>
+                <td class="column">JSON object holding data about requested genre, e.g. "A biographical film or biopic is a film that dramatizes the life of a non-fictional or historically-based person or people. Such films show the life of a historical person and the central character's real name is used."</td>
+            </tr>
+            <tr>
+                <td class="column">Return info about a director by name</td>
+                <td class="column">/directors/[name]</td>
+                <td class="column">GET</td>
+                <td class="column">:director</td>
+                <td class="column">None</td>
+                <td class="column">JSON object holding data about requested director, e.g. {"name": "Woody Allen",
+                    "birthyear": 1935,
+                    "bio": "He began his career writing material for television in the 1950s, mainly Your Show of Shows (1950-1954) working alongside Mel Brooks, Carl Reiner, Larry Gelbart, and Neil Simon. He also published several books featuring short stories and wrote humor pieces for The New Yorker. In the early 1960s, he performed as a stand-up comedian in Greenwich Village. He released three comedy albums during the mid to late 1960s, earning a Grammy Award for Best Comedy Album nomination for his 1964 comedy album entitled simply, Woody Allen."}</td>
+            </tr>
+            <tr>
+                <td class="column">Add new user</td>
+                <td class="column">/users</td>
+                <td class="column">POST</td>
+                <td class="column">:users</td>
+                <td class="column">JSON object holding user data, e.g. {
+                    "name": "Carlos",
+                    "favoriteMovies": ["Down by Law", "Bullets Over Broadway"]
+                }</td>
+                <td class="column">JSON object holding the new user's data, e.g. {
+                    "name": "Carlos",
+                    "favoriteMovies": [
+                        "Down by Law",
+                        "Bullets Over Broadway"
+                    ],
+                    "id": "0512c1b0-d179-4a88-a4b0-1c02eca255bc"
+                }</td>
+            </tr>
+            <tr>
+                <td class="column">Update user name</td>
+                <td class="column">/users/[id]/[name]</td>
+                <td class="column">PUT</td>
+                <td class="column">:id</td>
+                <td class="column">JSON object holding new user's name, e.g. {
+                    "name": "Albert"
+                }'</td>
+                <td class="column">JSON object holding the new user's data, e.g. {
+                    "id": 1,
+                    "name": "Albert",
+                    "favoriteMovies": [
+                        "Winter's Bone"
+                    ]
+                }</td>
+            </tr>
+            <tr>
+                <td class="column">Add a movie to a user's list of favorites</td>
+                <td class="column">/users/[id]/[favoriteMovies]</td>
+                <td class="column">PUT</td>
+                <td class="column">:id, :title</td>
+                <td class="column">None</td>
+                <td class="column">text output confirming requested action, e.g. "Dead Man has been added to your favorite's list."</td>
+            </tr>
+            <tr>
+                <td class="column">Remove a movie from a user's list of favorites</td>
+                <td class="column">/users/[id]/[favoriteMovies]</td>
+                <td class="column">DELETE</td>
+                <td class="column">:id, :title</td>
+                <td class="column">None</td>
+                <td class="column">text output confirming requested action, e.g. "Winter's Bone has been removed from your favorite's list."</td>
+            </tr>
+            <tr>
+                <td class="column">Delete user</td>
+                <td class="column">/users/[id]</td>
+                <td class="column">DELETE</td>
+                <td class="column">:id</td>
+                <td class="column">None</td>
+                <td class="column">text output confirming requested action, e.g. "User 1 has been removed from database."</td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 
