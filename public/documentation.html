@@ -28,6 +28,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Return all movies -->
             <tr>
                 <td class="column">Return list of all movies</td>
                 <td class="column">/movies</td>
@@ -35,97 +36,159 @@
                 <td class="column">None</td>              
                 <td class="column">None</td>
                 <td class="column">JSON object holding data about all movies, e.g.
-                    [{"Title": "Down by Law",
-                    "Year": 1986,
-                    "Genre": "Independent",
-                    "Director": "Jim Jarmusch"}, {...}, ...]</td>
+                    [{<br>["_id":{"$oid":"628b46e2c4a821595c0c9cd1"},<br>
+                    "Title": "Down by Law",<br>
+                    "Description":"Down by Law is a 1986... ",<br>
+                    "Year": 1986,<br>
+                    "Genre": {<br>
+                        "Name":"Independent",<br>
+                        "Description":"An independent film, independent movie,...",<br>
+                    },<br>
+                    "Director": {<br>
+                        "Name":"Jim Jarmusch",<br>
+                        "Bio":"James Robert Jarmusch is an American film director and...",<br>
+                        "Birth":"1953"<br>
+                    },<br>
+                    "Actors":["Tom Waits","John Lurie","Roberto Benigni"],<br>
+                    "ImagePath":"https://www.imdb.com/title/tt0090967/mediaviewer/rm2573133313/?ref_=tt_ov_i"]}, <br>
+                    {...}, ...<br>]<br></td>
             </tr>
+            <!-- Return info about one movie -->
             <tr>
                 <td class="column">Return info about one movie by title</td>
-                <td class="column">/movies/[title]</td>
+                <td class="column">/movies/[Title]</td>
                 <td class="column">GET</td>
                 <td class="column">:title</td>
                 <td class="column">None</td>
-                <td class="column">JSON object holding data about requested movie, e.g. {"Title": "Down by Law",
-                    "Year": 1986,
-                    "Genre": "Independent",
-                    "Director": "Jim Jarmusch"}</td>
+                <td class="column">JSON object holding data about requested movie, e.g. {[<br>"_id":{"$oid":"628b46e2c4a821595c0c9cd1"},<br>
+                    "Title": "Down by Law",<br>
+                    "Description":"Down by Law is a 1986... ",<br>
+                    "Year": 1986,<br>
+                    "Genre": {<br>
+                        "Name":"Independent",<br>
+                        "Description":"An independent film, independent movie,...",<br>
+                    },<br>
+                    "Director": {<br>
+                        "Name":"Jim Jarmusch",<br>
+                        "Bio":"James Robert Jarmusch is an American film director and...",<br>
+                        "Birth":"1953"<br>
+                    },<br>
+                    "Actors":["Tom Waits","John Lurie","Roberto Benigni"],<br>
+                    "ImagePath":"https://www.imdb.com/title/tt0090967/mediaviewer/rm2573133313/?ref_=tt_ov_i"<br>]}</td>
             </tr>
+            <!-- Return info about a genre -->
             <tr>
                 <td class="column">Return info about a genre by name</td>
-                <td class="column">/genres/[Genre]</td>
+                <td class="column">/movies/Genre/[Name]</td>
                 <td class="column">GET</td>
                 <td class="column">:genre</td>
                 <td class="column">None</td>
-                <td class="column">JSON object holding data about requested genre, e.g. "A biographical film or biopic is a film that dramatizes the life of a non-fictional or historically-based person or people. Such films show the life of a historical person and the central character's real name is used."</td>
+                <td class="column">JSON object holding data about requested genre, e.g. <br>"A biographical film or biopic is a film that dramatizes the life of a non-fictional or historically-based person or people. Such films show the life of a historical person and the central character's real name is used."</td>
             </tr>
+            <!-- Return info about a director -->
             <tr>
                 <td class="column">Return info about a director by name</td>
-                <td class="column">/directors/[name]</td>
+                <td class="column">/movies/Director/[Name]</td>
                 <td class="column">GET</td>
                 <td class="column">:director</td>
                 <td class="column">None</td>
-                <td class="column">JSON object holding data about requested director, e.g. {"name": "Woody Allen",
-                    "birthyear": 1935,
-                    "bio": "He began his career writing material for television in the 1950s, mainly Your Show of Shows (1950-1954) working alongside Mel Brooks, Carl Reiner, Larry Gelbart, and Neil Simon. He also published several books featuring short stories and wrote humor pieces for The New Yorker. In the early 1960s, he performed as a stand-up comedian in Greenwich Village. He released three comedy albums during the mid to late 1960s, earning a Grammy Award for Best Comedy Album nomination for his 1964 comedy album entitled simply, Woody Allen."}</td>
+                <td class="column">JSON object holding data about requested director, e.g. {<br>"name": "Woody Allen",<br>
+                    "birthyear": 1935,<br>
+                    "bio": "He began his career writing material for television in the 1950s, mainly Your Show of Shows (1950-1954) working alongside Mel Brooks, Carl Reiner, Larry Gelbart, and Neil Simon. He also published several books featuring short stories and wrote humor pieces for The New Yorker. In the early 1960s, he performed as a stand-up comedian in Greenwich Village. He released three comedy albums during the mid to late 1960s, earning a Grammy Award for Best Comedy Album nomination for his 1964 comedy album entitled simply, Woody Allen."<br>}</td>
             </tr>
+            <!-- Add new user -->
             <tr>
                 <td class="column">Add new user</td>
                 <td class="column">/users</td>
                 <td class="column">POST</td>
-                <td class="column">:users</td>
-                <td class="column">JSON object holding user data, e.g. {
-                    "name": "Carlos",
-                    "favoriteMovies": ["Down by Law", "Bullets Over Broadway"]
+                <td class="column">None</td>
+                <td class="column">JSON object holding user data, e.g. {<br>
+                    "_id":{"$oid":"628b46e6c4a821595c0c9cdc"},<br>
+                    "Username": "godzilla",<br>
+                    "Password":"monster_pw",<br>
+                    "Email":"fancymail@yahoo.com",<br>
+                    "Birthday":{"$date":"1987-11-01T00:00:00Z"},<br>
+                    "favoriteMovies": []<br>
                 }</td>
-                <td class="column">JSON object holding the new user's data, e.g. {
-                    "name": "Carlos",
-                    "favoriteMovies": [
-                        "Down by Law",
-                        "Bullets Over Broadway"
-                    ],
-                    "id": "0512c1b0-d179-4a88-a4b0-1c02eca255bc"
-                }</td>
+                <td class="column">JSON object holding the new user's data, e.g. {<br>
+                    "_id":ObjectId("628b46e6c4a821595c0c9cdc"),<br>
+                    "Username":"godzilla",<br>
+                    "Password":"monster_pw",<br>
+                    "Email":"fancymail@yahoo.com",<br>
+                    "Birthday":ISODate("1987-11-01T00:00:00Z"),<br>
+                    "FavoriteMovies":[]<br>}</td>
             </tr>
+            <!-- Update user info -->
             <tr>
                 <td class="column">Update user name</td>
-                <td class="column">/users/[id]/[name]</td>
+                <td class="column">/users/[username]</td>
                 <td class="column">PUT</td>
-                <td class="column">:id</td>
-                <td class="column">JSON object holding new user's name, e.g. {
-                    "name": "Albert"
-                }'</td>
-                <td class="column">JSON object holding the new user's data, e.g. {
-                    "id": 1,
-                    "name": "Albert",
-                    "favoriteMovies": [
-                        "Winter's Bone"
-                    ]
+                <td class="column">:username</td>
+                <td class="column">JSON object holding new user's name, e.g. {<br>
+                    "Username": "Alex",<br>
+                    "Password": "vmfosjpäopb",<br>
+                    "Email": "alex95@gmail.com",<br>
+                    "Birthday": "08/11/1967"<br>
+                }</td>
+                <td class="column">JSON object holding the new user's data, e.g. {<br>                   
+                    "_id": "6290565cb992bbdf466aa0d2",<br>
+                    "Username": "Alex",<br>
+                    "Password": "vmfosjpäopb",<br>
+                    "Email": "alex95@gmail.com",<br>
+                    "FavoriteMovies": [],<br>
+                    "__v": 0,<br>
+                    "Birthday": "1967-08-10T23:00:00.000Z"<br>
                 }</td>
             </tr>
+            <!-- Add movie to a user's list of favorites -->
             <tr>
                 <td class="column">Add a movie to a user's list of favorites</td>
                 <td class="column">/users/[id]/[favoriteMovies]</td>
-                <td class="column">PUT</td>
+                <td class="column">POST</td>
                 <td class="column">:id, :title</td>
                 <td class="column">None</td>
-                <td class="column">text output confirming requested action, e.g. "Dead Man has been added to your favorite's list."</td>
+                <td class="column">JSON object holding the user's actualized data, e.g. {  <br>                 
+                    "_id": "628b46e6c4a821595c0c9cdc",<br>
+                    "Username": "godzilla",<br>
+                    "Password": "monster_pw",<br>
+                    "Email": "fancymail@yahoo.com",<br>
+                    "Birthday": "1987-11-01T00:00:00.000Z",<br>
+                    "FavoriteMovies": [<br>
+                        "628b46e2c4a821595c0c9cd0",<br>
+                        "628b46e2c4a821595c0c9cd5",<br>
+                        "628b46e2c4a821595c0c9cda",<br>
+                        "628b46e2c4a821595c0c9cd6"<br>
+                    ]<br>
+                }</td>
             </tr>
+            <!-- Remove a movie from a user's list of favorites -->
             <tr>
                 <td class="column">Remove a movie from a user's list of favorites</td>
                 <td class="column">/users/[id]/[favoriteMovies]</td>
                 <td class="column">DELETE</td>
                 <td class="column">:id, :title</td>
                 <td class="column">None</td>
-                <td class="column">text output confirming requested action, e.g. "Winter's Bone has been removed from your favorite's list."</td>
+                <td class="column">JSON object holding the user's actualized data, e.g. { <br>                  
+                    "_id": "628b46e6c4a821595c0c9cdc",<br>
+                    "Username": "godzilla",<br>
+                    "Password": "monster_pw",<br>
+                    "Email": "fancymail@yahoo.com",<br>
+                    "Birthday": "1987-11-01T00:00:00.000Z",<br>
+                    "FavoriteMovies": [<br>
+                        "628b46e2c4a821595c0c9cd0",<br>
+                        "628b46e2c4a821595c0c9cd5",<br>
+                        "628b46e2c4a821595c0c9cda"<br>
+                    ]<br>
+                }</td>
             </tr>
+            <!-- Delete user -->
             <tr>
                 <td class="column">Delete user</td>
-                <td class="column">/users/[id]</td>
+                <td class="column">/users/[Username]</td>
                 <td class="column">DELETE</td>
-                <td class="column">:id</td>
+                <td class="column">:username</td>
                 <td class="column">None</td>
-                <td class="column">text output confirming requested action, e.g. "User 1 has been removed from database."</td>
+                <td class="column">text output confirming requested action, e.g. "Alex was deleted."</td>
             </tr>
         </tbody>
     </table>

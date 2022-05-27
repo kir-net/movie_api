@@ -11,3 +11,12 @@ h1, h2, p, table{
 h2{
     margin-top: 3vw;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border-top: 1px solid rgb(242, 242, 242);
+    border-bottom: 1px solid rgb(242, 242, 242);
+}
