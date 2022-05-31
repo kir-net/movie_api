@@ -206,23 +206,23 @@ app.post('/users',
     // See if user with requested username already exists
     Users
     .findOne({ Username: req.body.Username }) 
-      .then((user) => {
-        if (user) {
-          //If the user is found, send a response that it already exists
-          return res.status(400).send(req.body.Username + ' already exists');
-        } else {
-          Users
-            .create({
-              Username: req.body.Username,
-              Password: hashedPassword,
-              Email: req.body.Email,
-              Birthday: req.body.Birthday
-            })
-            .then((user) => { res.status(201).json(user) })
-            .catch((error) => {
-              console.error(error);
-              res.status(500).send('Error: ' + error);
-            });
+    .then((user) => {
+      if (user) {
+        //If the user is found, send a response that it already exists
+        return res.status(400).send(req.body.Username + ' already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) => { res.status(201).json(user) })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+          });
         }
       })
       .catch((error) => {
@@ -230,6 +230,7 @@ app.post('/users',
         res.status(500).send('Error: ' + error);
       });
   });
+
 
 // Update: User info
 /* expects JSON in this format:
@@ -245,7 +246,7 @@ app.put("/users/:Username",
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
-  ], (req, res) => {  
+  ], 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
       // check the validation object for errors
@@ -259,7 +260,7 @@ app.put("/users/:Username",
       $set:
       {
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday
       }
@@ -273,7 +274,8 @@ app.put("/users/:Username",
         res.json(updatedUser);
       }
     });
-});
+  }
+);
 
 // Create: Add movie to a user"s list of favorite movies 
 app.post("/users/:Username/movies/:addMovieID",  passport.authenticate("jwt", { session: false }), (req, res) => {
