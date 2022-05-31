@@ -14,6 +14,30 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// MUST be placed BEFORE let auth = require("./auth.js")(app)
+const cors = require("cors");
+
+// allow requests from all origins (!)
+app.use(cors());
+
+/* comment this part in and delete "app.use(cors());"
+    to allow access only from allowed origins
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on allowedOrigins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+*/
+
 // MUST be placed after bodyParser middleware function
 // (app) argument => make Express available in "auth.js"
 let auth = require("./auth.js")(app); 
@@ -156,12 +180,14 @@ app.get("/users/:Username",
   ID: Integer,
   Username: String,
   Password: String,
-  Email: String,
+  Email:    String,
   Birthday: Date
 }*/
 app.post("/users", 
   (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users
+    // see if the requested username already exists
     .findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -170,8 +196,8 @@ app.post("/users",
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
+            Password: hashedPassword,
+            Email:    req.body.Email,
             Birthday: req.body.Birthday
           })
           .then((user) =>{res.status(201).json(user) })
