@@ -53,8 +53,10 @@ app.use(morgan("common"));
 // serve static files
 app.use(express.static("public"));
 
-// connect to database
-mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
+// connect to local database
+// mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
+// connect to online database
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 
