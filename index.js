@@ -1,5 +1,6 @@
 // import modules
-require('dotenv').config();
+const dotenv = require('dotenv'); 
+dotenv.config()
  const express = require("express"),
         morgan = require("morgan"),
     bodyParser = require("body-parser"),
