@@ -1,4 +1,5 @@
 // import modules
+require('dotenv').config();
  const express = require("express"),
         morgan = require("morgan"),
     bodyParser = require("body-parser"),
@@ -53,7 +54,7 @@ app.use(morgan("common"));
 // serve static files
 app.use(express.static("public"));
 
-require('dotenv').config();
+
 // connect to local database
 // mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
 // connect to online database
