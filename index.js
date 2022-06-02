@@ -66,7 +66,6 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 
 //default text response when at /
 app.get("/",  
-  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     res.send("Welcome to my app!");
   }
