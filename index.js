@@ -57,10 +57,9 @@ app.use(express.static("public"));
 
 
 // connect to local database
-// mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
 // connect to online database
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+// mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // ----------------- CRUD -------------------------------
 
@@ -73,7 +72,8 @@ app.get("/",
 
 // OK Read: Get list of data about ALL movies
 app.get("/movies",  
-  passport.authenticate("jwt", { session: false }),
+  // temporarily commented out in order to enable React app access
+  // passport.authenticate("jwt", { session: false }),
   (req, res)  => {
       Movies
       .find()

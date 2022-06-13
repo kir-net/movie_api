@@ -1,4 +1,7 @@
 node_modules/
+swagger-editor-master/
+
+swagger.yml
 
 server.js
 
