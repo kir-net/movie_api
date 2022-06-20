@@ -72,8 +72,7 @@ app.get("/",
 
 // OK Read: Get list of data about ALL movies
 app.get("/movies",  
-  // temporarily commented out in order to enable React app access
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res)  => {
       Movies
       .find()
