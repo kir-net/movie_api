@@ -21,24 +21,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require("cors");
 
 // allow requests from all origins (!)
-app.use(cors());
+// app.use(cors());
 
-/* comment this part in and delete "app.use(cors());"
-    to allow access only from allowed origins
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = [
+    'http://localhost:8080', 
+    'http://testsite.com', 
+    'http://localhost:1234', 
+    'https://kirnetsmoviesapp.netlify.app/'
+];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on allowedOrigins
-      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
+            let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+            return callback(new Error(message), false);
+        }
+        return callback(null, true);
     }
-    return callback(null, true);
-  }
 }));
-*/
+
 
 // MUST be placed after bodyParser middleware function
 // (app) argument => make Express available in "auth.js"
