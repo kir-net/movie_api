@@ -29,7 +29,8 @@ let allowedOrigins = [
     'http://localhost:4200',
     'http://testsite.com', 
     'http://localhost:1234', 
-    'https://kirnetsmoviesapp.netlify.app/'
+    'https://kirnetsmoviesapp.netlify.app/',
+    'https://kir-net.github.io',
 ];
 
 app.use(cors({
