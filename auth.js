@@ -10,7 +10,7 @@ require("./passport.js"); // local passport file
  * @function generateJWTToken
  * Creates a JWT token
  * @param {Object} user
- * @returns {Object} user
+ * @returns {Object} user, jwt, and token parameters
  */
 let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
@@ -25,7 +25,7 @@ let generateJWTToken = (user) => {
  * @function [path]/login
  * POST: User login 
  * @param {any} router
- * @returns {Object} user
+ * @returns {Object} user with jwt 
  * @requires passport
  */ 
 module.exports = (router) => {

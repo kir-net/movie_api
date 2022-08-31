@@ -70,11 +70,9 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 
 // ----------------- CRUD -------------------------------
 
-//default text response when at /
+
 /**
- * Redirects to index.html
- * @param {express.request} req
- * @param {express.response} res
+ * Redirect to index.html, show default text response when at /
  */
 app.get("/",  
     (req, res) => {res.send("Welcome to my app!")}
