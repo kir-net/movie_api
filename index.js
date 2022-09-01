@@ -32,6 +32,7 @@ let allowedOrigins = [
     'https://kirnetsmoviesapp.netlify.app/',
     'https://myflix-client-abc.netlify.app',
     'https://kir-net.github.io',
+    'https://upload.wikimedia.org'
 ];
 
 
