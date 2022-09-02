@@ -12,6 +12,8 @@ const Users = Models.User;
 
 // Use the Morgan middleware library to log all requests
 const app = express();
+const port = process.env.PORT || 8080;
+const dsnConnection = process.env.CONNECTION_URI || 'mongodb://localhost:27017/test';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,10 +31,7 @@ let allowedOrigins = [
     'http://localhost:4200',
     'http://testsite.com', 
     'http://localhost:1234', 
-    'https://kirnetsmoviesapp.netlify.app/',
-    'https://myflix-client-abc.netlify.app',
-    'https://kir-net.github.io',
-    'https://upload.wikimedia.org'
+    'https://kir-net.github.io'
 ];
 
 
@@ -67,10 +66,9 @@ app.use(express.static("public"));
 // connect to local database
 // mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
 // connect to online database
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dsnConnection, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // ----------------- CRUD -------------------------------
-
 
 /**
  * Redirect to index.html, show default text response when at /
@@ -162,8 +160,6 @@ app.get("/movies/directors/:directorsName",
     }
 );
 
-
-// 
 /**
  * @function [path]/users/
  * GET: Read information about all users
@@ -181,7 +177,6 @@ app.get("/users",
         });
     }
 );
-
 
 /**
  * @function [path]/users/:username
@@ -202,7 +197,6 @@ app.get("/users/:Username",
         });
     }
 );
-
 
 /**
  * Password is hashed
@@ -252,7 +246,6 @@ app.post('/users',
     }
 );
 
-
 /**
  * @function [path]/users/:username/update
  * PUT: Allow users to update their user data
@@ -297,8 +290,6 @@ app.put("/users/:Username",
     }
 );
 
-
-// Create: Add movie to a user"s list of favorite movies
 /**
  * @function [path]/users/:username/movies/:movieID
  * POST: Allow users to add a movie to their list of favorites
@@ -323,7 +314,6 @@ app.post("/users/:Username/movies/:MovieID",  passport.authenticate("jwt", { ses
     });
 });
 
-
 /** 
  * @function [path]/users/:Username/Movies/:MovieID
  * DELETE: Remove movie from a user"s list of favorite movies
@@ -347,7 +337,6 @@ app.delete("/Users/:Username/Movies/:MovieID",  passport.authenticate("jwt", { s
     );
 });
 
- 
 /**
  * @function [path]/users/
  * DELETE: Remove a user by username
@@ -385,7 +374,6 @@ app.use((err, req, res, next) => {
  * @function app.listen
  * @param {number} port
  */
-const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0",() => {
   console.log("Listening on Port " + port);
 });
