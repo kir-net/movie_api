@@ -2,7 +2,8 @@
 
 MyFlix API is the server-side component of a small “movies” web application. It provides users with access to information about different movies, directors, and genres. Users may sign up, update their personal information, and create a list of their favorite movies.
 
-[API documentation](./public/documentation.html)
+## API documentation
+For a list of endpoints and responses check out the [documentation](./public/documentation.html) file
 
 ## Project details
 The project has been developed as an assignment of the CareerFoundry Full Stack Web Developer course.
